@@ -1,0 +1,142 @@
+Index: configure
+===================================================================
+--- configure	(revision 37244)
++++ configure	(working copy)
+@@ -1805,6 +1805,7 @@
+ if mingw32 ; then
+   _getch=getch2-win.c
+   shmem=yes
++  extra_cflags="-mno-ms-bitfields -D__USE_MINGW_ANSI_STDIO=1 $extra_cflags"
+ fi
+ 
+ if amigaos ; then
+Index: Makefile
+===================================================================
+--- Makefile	(revision 37244)
++++ Makefile	(working copy)
+@@ -685,6 +685,8 @@
+ OBJS_MPLAYER                  += $(addsuffix .o, $(basename $(SRCS_MPLAYER)))
+ OBJS_MPLAYER-$(PE_EXECUTABLE) += osdep/mplayer-rc.o
+ OBJS_MPLAYER                  += $(OBJS_MPLAYER-yes)
++OBJS_MENCODER-$(PE_EXECUTABLE) += osdep/mencoder-rc.o
++OBJS_MENCODER += $(OBJS_MENCODER-yes)
+ 
+ MENCODER_DEPS = $(OBJS_MENCODER) $(OBJS_COMMON) $(COMMON_LIBS)
+ MPLAYER_DEPS  = $(OBJS_MPLAYER)  $(OBJS_COMMON) $(COMMON_LIBS)
+@@ -793,6 +795,9 @@
+ check_checksums: $(MPLAYER_DEPS) $(MENCODER_DEPS) mplayer$(EXESUF) mencoder$(EXESUF)
+ 	md5sum -c checksums
+ 
++osdep/mencoder-rc.o: osdep/mplayer.rc version.h
++	 $(WINDRES) -D IN_MENCODER -o $@ $<
++
+ # ./configure must be rerun if it changed
+ config.mak: configure
+ 	@echo "############################################################"
+Index: osdep/mplayer.rc
+===================================================================
+--- osdep/mplayer.rc	(revision 37244)
++++ osdep/mplayer.rc	(working copy)
+@@ -19,8 +19,16 @@
+  */
+ 
+ #include <winver.h>
+-#include "version.h"
++#include "../version.h"
+ 
++#ifdef IN_MENCODER
++#define FILENAME "mencoder.exe\000"
++#define DESCRIPTION "MEncoder\000"
++#else
++#define FILENAME "mplayer.exe\000"
++#define DESCRIPTION "MPlayer - The Movie Player\000"
++#endif
++
+ 1 VERSIONINFO
+ FILEVERSION 0,0,9,0
+ PRODUCTVERSION 0,0,9,0
+@@ -33,15 +41,22 @@
+         {
+             VALUE "Comments","MPlayer is distributed under the terms of the GNU General Public License Version 2. Source code is available at http://www.mplayerhq.hu\000"
+             VALUE "CompanyName", "\000"
+-            VALUE "FileDescription", "MPlayer - Movie Player\000"
++            VALUE "FileDescription",DESCRIPTION
+             VALUE "FileVersion",VERSION
+             VALUE "InternalName", "Counter Counter\000"
+             VALUE "LegalCopyright", " (C) 2000-2014 MPlayer Team\000"
+             //VALUE "LegalTrademarks"," \000";
+-            VALUE "OriginalFilename", "mplayer.exe\000"
+-            VALUE "ProductName", "MPlayer - The Movie Player\000"
++            VALUE "OriginalFilename",FILENAME
++            VALUE "ProductName",DESCRIPTION
++            #if defined(_WIN64)
++            VALUE "ProductVersion",VERSION " (64-bit)\000"
++            #elif defined(_WIN32) && !defined (_WIN64)
++            VALUE "ProductVersion",VERSION " (32-bit)\000"
++            #else
+             VALUE "ProductVersion",VERSION
++            #endif
+             //VALUE "SpecialBuild","\000"
++            VALUE "SpecialBuild","http://mplayerwin.sf.net\000"
+         }
+     }
+     BLOCK "VarFileInfo"
+@@ -50,7 +65,12 @@
+     }
+ }
+ 
+-IDI_ICON1 ICON DISCARDABLE  "etc/mplayer.ico"
++#ifdef IN_MENCODER
++IDI_ICON1   ICON   DISCARDABLE   "etc/mencoder.ico"
++#else
++IDI_ICON1   ICON   DISCARDABLE   "etc/mplayer.ico"
++IDI_ICON2   ICON   DISCARDABLE   "etc/mp_assoc.ico"
++#endif
+ 
+ // for some reason RT_MANIFEST does not work
+ 1 24 "mplayer.exe.manifest"
+Index: version.sh
+===================================================================
+--- version.sh	(revision 37244)
++++ version.sh	(working copy)
+@@ -12,19 +12,37 @@
+ test $svn_revision || svn_revision=$(LC_ALL=C svn info 2> /dev/null | grep Revision | cut -d' ' -f2)
+ test $svn_revision || svn_revision=$(grep revision .svn/entries 2>/dev/null | cut -d '"' -f2)
+ test $svn_revision || svn_revision=$(sed -n -e '/^dir$/{n;p;q;}' .svn/entries 2>/dev/null)
+-test $svn_revision && svn_revision=SVN-r$svn_revision
++test $svn_revision && svn_revision=Redxii-SVN-r$svn_revision
+ test $svn_revision || svn_revision=UNKNOWN
+ version=$svn_revision
+ fi
+ 
++# Get GCC Target
++# Best guess to determine 32-bit/64-bit
++my_gcctarget=$(LC_ALL=C gcc -v 2>&1 /dev/null | grep "Target:" | cut -d' ' -f2)
++
++if test "$my_gcctarget" = "i686-w64-mingw32" ; then
++  my_arch=i686
++elif test "$my_gcctarget" = "x86_64-w64-mingw32" ; then
++  my_arch=x86_64
++elif test "$my_gcctarget" = "mingw32" ; then
++  my_arch=i686
++fi
++
+ NEW_REVISION="#define VERSION \"${version}${extra}\""
+ OLD_REVISION=$(head -n 1 version.h 2> /dev/null)
+-TITLE='#define MP_TITLE "%s "VERSION" (C) 2000-2014 MPlayer Team\n"'
++BUILD_DATE="#define BUILD_DATE \"$(date)\""
++MY_ARCH="#define MP_ARCH \"${my_arch}\""
++TITLE='#define MP_TITLE "%s "VERSION" ("MP_ARCH") (C) 2000-2014 MPlayer Team\nCompiled against FFmpeg version "FFMPEG_VERSION"\nBuild date: "BUILD_DATE"\n"'
+ 
+ # Update version.h only on revision changes to avoid spurious rebuilds
+ if test "$NEW_REVISION" != "$OLD_REVISION"; then
+     cat <<EOF > version.h
++#include "dev/ffmpeg_version.h"
++
+ $NEW_REVISION
++$BUILD_DATE
++$MY_ARCH
+ $TITLE
+ EOF
+ fi
+ 

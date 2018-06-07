@@ -1,0 +1,23 @@
+# normal ignores
+.*
+*~
+*.[ao]
+*.lo
+*.so
+tags
+cscope.out
+!.gitignore
+!.travis.yml
+
+# top-level ignores
+/*.spec
+/config
+/config.mk
+/cmus
+/cmus-remote
+
+# Cygwin stuff
+*.exe
+/cmus.base
+/cmus.def
+/cmus.exp

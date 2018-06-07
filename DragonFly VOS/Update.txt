@@ -1,0 +1,7 @@
+NOTE: Due to changes in development schedule and features that the O.S. is intended to come with, the official beta release date has been pushed out to Winter 2018/2019. This is to ensure that we put out a decent, functioning product (it may be freeware, but it will be *good* freeware). Kernel and bootloader development are actually complete, and debugging is currently under way. The shell implementation will occur after the addition of the planed *kernel-level modules (Network Interface Manager, *Memory Manager, *Hardware Interface Controller, *Software Interface Controller, Thread Manager, Update Manager, *TXP-FSys). Also, just updated the platforms that this O.S. will support (in the userland Library folder - not kernel folder). Intel x86/64 CPUs for the first few versions. It’s gonna be a long winter this year. If you want to get involved, contact us! Make sure you have a working knowledge of platform-independent, non-STDLib C and/or C++. Please check back every-so-often for updates...
+
+#STLPortForKernel
+#IntelSyntaxOnly
+#GASIsNotMyASM
+#Modules
+#NotALinuxDistro

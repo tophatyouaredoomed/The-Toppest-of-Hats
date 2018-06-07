@@ -1,0 +1,38 @@
+// taken from gcc testsuite
+// Author: Matt Austern
+
+struct B
+{
+  B();
+  int n;
+};
+
+B::B()
+{
+  n = 137;
+}
+
+
+struct D : public B
+{
+  double x;
+};
+
+
+D* allocate(int n)
+{
+  void *p;
+  p = malloc(n * sizeof (D));
+  memset (p, 0xff, n * sizeof(D));
+  return new (p) D[n]();
+}
+
+int main()
+{
+  const int n = 17;
+  D* p = allocate(n);
+  for (int i = 0; i < n; ++i)
+    if (p[i].n != 137 || p[i].x != 0)
+      abort ();
+  exit (0);
+}

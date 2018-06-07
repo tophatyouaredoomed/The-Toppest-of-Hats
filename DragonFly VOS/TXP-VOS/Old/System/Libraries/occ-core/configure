@@ -1,0 +1,6 @@
+set -xe
+(cd ./occ-core/parser && ./ptree-gen.sh)
+mkdir -p bin
+:
+: to build and test run 'make test'
+:

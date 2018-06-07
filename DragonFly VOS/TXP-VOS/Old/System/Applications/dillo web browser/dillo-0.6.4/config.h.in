@@ -1,0 +1,43 @@
+/* config.h.in.  Generated automatically from configure.in by autoheader.  */
+
+/* Define if you have the <fcntl.h> header file. */
+#undef HAVE_FCNTL_H
+
+/* Define if you have the <jconfig.h> header file. */
+#undef HAVE_JCONFIG_H
+
+/* Define if you have the <jerror.h> header file. */
+#undef HAVE_JERROR_H
+
+/* Define if you have the <jmorecfg.h> header file. */
+#undef HAVE_JMORECFG_H
+
+/* Define if you have the <jpeglib.h> header file. */
+#undef HAVE_JPEGLIB_H
+
+/* Define if you have the `png' library (-lpng). */
+#undef HAVE_LIBPNG
+
+/* Define if you have the `pthread' library (-lpthread). */
+#undef HAVE_LIBPTHREAD
+
+/* Define if you have the `z' library (-lz). */
+#undef HAVE_LIBZ
+
+/* Define if you have the `socket' function. */
+#undef HAVE_SOCKET
+
+/* Define if you have the <sys/uio.h> header file. */
+#undef HAVE_SYS_UIO_H
+
+/* Define if you have the <unistd.h> header file. */
+#undef HAVE_UNISTD_H
+
+/* Name of package */
+#undef PACKAGE
+
+/* Define if you have the ANSI C header files. */
+#undef STDC_HEADERS
+
+/* Version number of package */
+#undef VERSION

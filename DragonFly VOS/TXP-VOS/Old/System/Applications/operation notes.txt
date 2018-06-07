@@ -1,0 +1,9 @@
+normal go states (clwncm): 1,2,0
+normal go states (chrono): 1,2,0
+normal System states (system): go
+normal log states (logger): 0,1,-1
+
+Oh; while I'm at it, I might as well tell you this.
+system.cpp has been created in its finalized version (for now - until debugging).
+Also, we are no longer using external threading libraries; Pthreads to the rescue!
+CCGI may be put to use some time in the future...

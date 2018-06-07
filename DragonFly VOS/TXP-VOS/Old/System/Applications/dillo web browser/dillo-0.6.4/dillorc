@@ -1,0 +1,110 @@
+# dillorc
+# Sample dillo initialization file.
+# Copy this file to ~/.dillo/dillorc and edit to your tastes.
+# Lines that start with a '#' are comments.
+
+
+#-------------------------------------------------------------------------
+#                             FIRST SECTION                             :)
+#-------------------------------------------------------------------------
+
+# Set the desired initial browser size
+geometry=640x550
+
+# Dicache is where the Decompressed Images are cached (not the original ones).
+# If you have a lot of memory and a slow CPU, use YES, otherwise use NO
+use_dicache=NO
+
+
+#-------------------------------------------------------------------------
+#                           RENDERING SECTION
+#-------------------------------------------------------------------------
+
+# All fontsizes are scaled by this value (default is 1.0)
+#font_factor=1.2
+
+# If you prefer oblique over italic fonts, uncoment next line
+#use_oblique=YES
+
+# Show ALT popup for images?
+show_alt=YES
+
+# Set this to YES, if you want to limit the word wrap width to the vieport
+# width (may be useful for iPAQ)
+limit_text_width=NO
+
+
+#-------------------------------------------------------------------------
+#                            NETWORK SECTION
+#-------------------------------------------------------------------------
+
+# Set the home location
+home=http://dillo.sourceforge.net/
+
+# Set the proxy information for http
+#http_proxy=http://localhost:8080/
+
+# When using a proxy, this sets the domains to access without proxy.
+# (separated with a single space -- see examples below)
+#no_proxy = ".mynet.com"
+#no_proxy = ".mynet.com .other.net .foo.bar.org"
+
+
+#-------------------------------------------------------------------------
+#                            COLORS SECTION
+#-------------------------------------------------------------------------
+
+# Here we can use the HTML (standar and extended) or C syntax.
+
+# Set the background color
+# bg_color=gray
+# bg_color=0xd6d6c0
+bg_color=0xdcd1ba
+
+# Set the text color
+text_color=black
+
+# Set the link color
+link_color=blue
+
+# If your eyes suffer with white backgrounds, or you have headaches after
+# lengthy computer sessions, and you don't need high contrast to see sharply,
+# uncomment next line (it'll use 'bg_color' instead).   -- It works!
+#allow_white_bg=NO
+
+# Use the same colors with all documents?
+force_my_colors=NO
+
+# When set to YES, visited links always have a characteristic color,
+# independent of the author's setting.
+force_visited_color=YES
+
+#-------------------------------------------------------------------------
+#                        USER INTERFACE SECTION
+#-------------------------------------------------------------------------
+
+# Size of dillo panel (used to enlarge the browsing area)
+# tiny   :  recommended for iPAQ (with small_icons)
+# medium :  nice!
+# large  :  Traditional
+panel_size=tiny
+small_icons=NO
+
+# Here you can choose to hide some widgets of the dillo panel...
+#show_back=NO
+#show_forw=NO
+#show_home=NO   
+#show_reload=NO
+#show_save=NO
+#show_stop=NO
+#show_menubar=NO
+#show_clear_url=NO
+#show_url=NO
+#show_progress_box=NO
+
+# Enabling this will restrain OpenUrl and FindText, but may be required
+# for the ION window manager.
+transient_dialogs=NO
+
+# -----------------------------------------------------------------------
+# dillorc ends here.

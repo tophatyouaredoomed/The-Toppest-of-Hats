@@ -1,0 +1,109 @@
+Jan 2001, S.Geerken@ping.de
+Updated May 2001
+
+=======
+DwImage
+=======
+
+A widget for displaying images and handling image maps.
+
+
+Image Maps
+==========
+
+Client Side Image Maps
+----------------------
+You must first create a list of image maps: Allocate a DwImageMapList,
+and initialize it by calling a_Dw_image_map_list_init. Adding a map is
+done by a_Dw_image_map_list_add_map, a_Dw_image_map_list_add_shape
+adds a shape to the last map. For the meaning of the link argument,
+see Section "Signals".
+
+Image maps are referred by a URL (not only by a name), but currently,
+the image map list is stored in DilloHtmlLB, and there is no
+possibility to parse documents without rendering, so images can only
+use maps defined in the same document.
+
+To use a map in an image, call a_Dw_image_set_usemap with the image,
+the map list, and the URL of the map. Passing the whole list makes it
+possible to use maps parsed after the image is created.
+
+
+Server Side Image Maps
+----------------------
+To use images for server side image maps, you must call
+a_Dw_image_set_ismap, and the style must contain a valid link
+element. See section "Signals" for more details.
+
+
+Signals
+=======
+
+There are four signals, which can be connected to process actions with
+links. All have at least three arguments:
+
+   - link is the link element of the DwStyle (server side image maps)
+     or DwImageMapShape (client side image maps), respectively, an
+     integer, which is currently only used for hypertext links, but
+     generally, it depends on the signal callback how this value is
+     used.
+
+   - x and y are, when server side image maps are used, the relative
+     coordinates of the mouse pointer, otherwise always -1.
+
+Note that, unlike by DwPage before, no cursors are set, instead, the
+signal callback function has to do this.
+
+The signals:
+
+   - void link_entered (DwPage *page,
+                        gint link, gint x, gint y)
+
+     Emitted when the link the mouse pointer is over has
+     changed. "Changed" includes link, x and y, so this signal is also
+     emitted each time the pointer is moved within a server side image
+     map. If the pointer is outside of a link, all arguments have the
+     value -1.
+
+
+   - void link_pressed (DwPage *page,
+                        gint link, gint x, gint y,
+                        GdkEventButton *event)
+
+     Emitted when the user presses a mouse button _inside_ a link,
+     this signal is never emitted with link = -1. You can use the
+     event to get information about the button, shift keys etc.
+
+
+   - void link_released (DwPage *page,
+                         gint link, gint x, gint y,
+                         GdkEventButton *event)
+
+   - void link_clicked (DwPage *page,
+                        gint link, gint x, gint y,
+                        GdkEventButton *event)
+
+     Analogue to link_pressed.
+
+
+Future Extentions
+=================
+
+  - Transparency could be done by clipping bitmaps, alpha (as
+    provided by PNG) by dithered clipping bitmaps. This will increase
+    the usage of X resources, but the current implementation (i)
+    looks ugly on 8 bit displays, and (ii) will, as soon as
+    background images are supported, make it necessary to rebuild the
+    image at every call of Dw_image_size_allocate and so slow down
+    rendering.
+
+  - Animated GIF's are currently not supported.
+
+  - Border for images used as link will be done with an extended
+    DwStyle scheme.
+
+  - There is little code for support of background images in
+    a_dw_gtk_viewport.c (only internal code, no interfaces yet, and it
+    will probably move into DwStyle), but this code needs a GdkPixmap,
+    or at least an RGB buffer. The the code of the Image module should
+    be used for this somehow.

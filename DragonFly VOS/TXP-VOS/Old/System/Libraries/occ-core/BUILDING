@@ -1,0 +1,9 @@
+To build and test OpenC++-Core run:
+
+    ./configure
+    make test
+
+You will find targets in ./bin
+
+Enjoy. Contribute.
+

@@ -1,0 +1,1 @@
+@PtreeDeclaration[0,@NonLeaf[@PtreeClassSpec[*LeafReserved["class"],@NonLeaf[*Leaf["A"],@NonLeaf[0,@NonLeaf[@PtreeClassBody[*Leaf["{"],@NonLeaf[0,@NonLeaf[*Leaf["}"],0]]],0]]]],@NonLeaf[*Leaf[";"],0]]]

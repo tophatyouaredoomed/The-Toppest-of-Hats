@@ -1,0 +1,16 @@
+/anew4.in////*///
+/anew4.out.gold////*///
+/classdecl.in////*///
+/classdecl.out.gold////*///
+/fundecl.in////*///
+/fundecl.out.gold////*///
+/if.in////*///
+/if.out.gold////*///
+/nontrivial-function.in////*///
+/nontrivial-function.out.gold////*///
+/template1.in////*///
+/template1.out.gold////*///
+/typedefdecl.in////*///
+/typedefdecl.out.gold////*///
+/vardecl.in////*///
+/vardecl.out.gold////*///

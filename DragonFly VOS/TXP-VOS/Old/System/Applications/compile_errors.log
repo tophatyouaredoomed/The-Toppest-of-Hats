@@ -1,0 +1,80 @@
+From: http://cpp.sh/
+
+Most of these are warnings, related to the logging system. These will be fixed soon, when I break up the file writing process into two file-appending lines instead of one.
+The errors that actually matter (and are few in number - 5 in total) all relate to data types (conversion errors) and a logging filename that probably just needs to be changed, because I'm using Linux resources.
+
+The kernel.cpp file should be virtually error free. The Bootloader and kernel (written in Assembler), on the other hand, may need some work...
+
+This is the last major update for the userspace systems.
+
+847:16: warning: character constant too long for its type
+847:44: warning: character constant too long for its type
+847:65: warning: multi-character character constant [-Wmultichar]
+853:16: warning: character constant too long for its type
+853:44: warning: character constant too long for its type
+853:65: warning: multi-character character constant [-Wmultichar]
+859:16: warning: character constant too long for its type
+859:44: warning: character constant too long for its type
+859:65: warning: multi-character character constant [-Wmultichar]
+865:16: warning: character constant too long for its type
+865:44: warning: character constant too long for its type
+865:65: warning: multi-character character constant [-Wmultichar]
+871:16: warning: character constant too long for its type
+871:44: warning: character constant too long for its type
+871:65: warning: multi-character character constant [-Wmultichar]
+877:16: warning: character constant too long for its type
+877:44: warning: character constant too long for its type
+877:65: warning: multi-character character constant [-Wmultichar]
+883:16: warning: character constant too long for its type
+883:44: warning: character constant too long for its type
+883:65: warning: multi-character character constant [-Wmultichar]
+889:16: warning: character constant too long for its type
+889:44: warning: character constant too long for its type
+889:65: warning: multi-character character constant [-Wmultichar]
+896:16: warning: character constant too long for its type
+896:44: warning: character constant too long for its type
+896:65: warning: multi-character character constant [-Wmultichar]
+902:16: warning: character constant too long for its type
+902:44: warning: character constant too long for its type
+902:65: warning: multi-character character constant [-Wmultichar]
+908:16: warning: character constant too long for its type
+908:44: warning: character constant too long for its type
+908:65: warning: multi-character character constant [-Wmultichar]
+914:16: warning: character constant too long for its type
+914:44: warning: character constant too long for its type
+914:65: warning: multi-character character constant [-Wmultichar]
+920:16: warning: character constant too long for its type
+920:44: warning: character constant too long for its type
+920:65: warning: multi-character character constant [-Wmultichar]
+926:16: warning: character constant too long for its type
+926:44: warning: character constant too long for its type
+926:65: warning: multi-character character constant [-Wmultichar]
+932:16: warning: character constant too long for its type
+932:44: warning: character constant too long for its type
+932:65: warning: multi-character character constant [-Wmultichar]
+938:16: warning: character constant too long for its type
+938:44: warning: character constant too long for its type
+938:65: warning: multi-character character constant [-Wmultichar]
+946:16: warning: character constant too long for its type
+946:44: warning: character constant too long for its type
+946:65: warning: multi-character character constant [-Wmultichar]
+954:16: warning: character constant too long for its type
+954:44: warning: character constant too long for its type
+954:65: warning: multi-character character constant [-Wmultichar]
+31:5: error: 'int log' redeclared as different kind of symbol
+In file included from /usr/include/features.h:374:0,
+                 from /usr/include/x86_64-linux-gnu/c++/4.9/bits/os_defines.h:39,
+                 from /usr/include/x86_64-linux-gnu/c++/4.9/bits/c++config.h:430,
+                 from /usr/include/c++/4.9/iostream:38,
+                 from 1:
+/usr/include/x86_64-linux-gnu/bits/mathcalls.h:109:1: note: previous declaration 'double log(double)'
+ __MATHCALL (log,, (_Mdouble_ __x));
+ ^
+35:14: warning: deprecated conversion from string constant to 'char*' [-Wwrite-strings]
+ In function 'bool Object_exists(const char*, std::string)':
+62:11: error: declaration of 'char* object' shadows a parameter
+62:27: error: request for member 'c_str' in 'object', which is of non-class type 'char*'
+ At global scope:
+69:28: error: cannot convert 'std::string {aka std::basic_string<char>}' to 'char' in initialization
+70:1: error: expected ',' or ';' before '{' token
+ 

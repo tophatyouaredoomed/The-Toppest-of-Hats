@@ -1,0 +1,4 @@
+
+class a;
+
+typedef a b;

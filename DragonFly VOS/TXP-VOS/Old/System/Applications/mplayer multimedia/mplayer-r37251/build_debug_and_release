@@ -1,0 +1,17 @@
+#! /bin/sh
+export LC_ALL=C
+
+for ac_option do
+  case "$ac_option" in
+  -nm)        menc_opt=-nm           ;;
+  -r)         rbin_opt=/releasebins   ;;
+  *)
+    echo "Unknown parameter: $ac_option"
+    exit 1
+    ;;
+
+  esac
+done
+
+./build_mplayer --prefix=/e/Buildsys/projects/mplayer/packaging$rbin_opt $menc_opt
+./build_mplayer --prefix=/e/Buildsys/projects/mplayer/packaging$rbin_opt $menc_opt -d

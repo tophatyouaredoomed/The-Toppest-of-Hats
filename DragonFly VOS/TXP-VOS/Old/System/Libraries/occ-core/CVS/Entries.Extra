@@ -1,0 +1,11 @@
+/BUILDING////*///
+/Makefile////*///
+/configure////*///
+/elaboration-test.in////*///
+/elaboration-test.py////*///
+/lexer-test.py////*///
+/parser-dump-tool.py////*///
+/parser-test.py////*///
+D/lexer-test///////
+D/occ-core///////
+D/parser-test///////

@@ -1,0 +1,7 @@
+template <int n> class A { A(int) {} };
+
+int main()
+{
+    A<4>(5);
+}
+

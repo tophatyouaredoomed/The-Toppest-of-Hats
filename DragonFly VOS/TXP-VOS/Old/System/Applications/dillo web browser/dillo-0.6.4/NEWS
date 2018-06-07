@@ -1,0 +1,21 @@
+----
+NEWS
+----
+
+March 2001:
+
+  Finally the new dillo widget is ready! (dillo >= 0.4.0).
+  0.4.0 is able to cope with low resolution depths.
+
+
+Nov 2000:
+
+  Introduced a new design layer between the IO and the Dw.
+
+  We'll try to focus on table rendering.
+
+  Jorge.-
+  jcid@ematic.com
+  Project maintainer, core developer, patcher, you name it! :-)
+
+

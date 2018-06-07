@@ -1,0 +1,1 @@
+@PtreeDeclaration[0,@NonLeaf[@NonLeaf[*LeafINT["int"],0],@NonLeaf[@PtreeDeclarator[*Leaf["main"],@NonLeaf[*Leaf["("],@NonLeaf[0,@NonLeaf[*Leaf[")"],0]]]],@NonLeaf[@PtreeBlock[*Leaf["{"],@NonLeaf[0,@NonLeaf[*Leaf["}"],0]]],0]]]]

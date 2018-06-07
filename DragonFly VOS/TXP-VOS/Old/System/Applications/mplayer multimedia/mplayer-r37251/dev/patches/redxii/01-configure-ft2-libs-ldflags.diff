@@ -1,0 +1,39 @@
+Index: configure
+===================================================================
+--- configure	(revision 37244)
++++ configure	(working copy)
+@@ -6042,11 +6044,11 @@
+ echocheck "Blu-ray support"
+ if test "$_bluray" = auto ; then
+   _bluray=no
+-  statement_check libbluray/bluray.h 'bd_get_title_info(0, 0, 0)' -lbluray && _bluray=yes
++  statement_check libbluray/bluray.h 'bd_get_title_info(0, 0, 0)' -lbluray $($_freetypeconfig --libs) && _bluray=yes
+ fi
+ if test "$_bluray" = yes ; then
+   def_bluray='#define CONFIG_LIBBLURAY 1'
+-  extra_ldflags="$extra_ldflags -lbluray"
++  extra_ldflags="$extra_ldflags -lbluray $($_freetypeconfig --libs)"
+   inputmodules="bluray $inputmodules"
+ else
+   def_bluray='#undef CONFIG_LIBBLURAY'
+@@ -6315,7 +6317,7 @@
+ }
+ EOF
+   _fontconfig=no
+-  for ld_tmp in "" "-lexpat -lfreetype" "-lexpat -lfreetype -lz" "-lexpat -lfreetype -lz -liconv" ; do
++  for ld_tmp in "" "-lexpat -lfreetype" "-lexpat $($_freetypeconfig --libs)" ; do
+     ld_tmp="-lfontconfig $ld_tmp"
+     cc_check $ld_tmp && _fontconfig=yes && extra_ldflags="$extra_ldflags $ld_tmp" && break
+   done
+@@ -6397,9 +6399,9 @@
+   return 0;
+ }
+ EOF
+-        if cc_check -lass ; then
++        if cc_check -lass -lenca ; then
+             res_comment="external"
+-            extra_ldflags="$extra_ldflags -lass"
++            extra_ldflags="$extra_ldflags -lass $($_freetypeconfig --libs)"
+         elif test "$ass_internal" = auto ; then
+             ass_internal=yes
+         else
